@@ -68,10 +68,3 @@ if __name__ == '__main__':
     app.run(debug=True)
     
     def get_db_connection():
-    # Esto crea la carpeta si no existe, así evita errores
-    if not os.path.exists(os.path.dirname(DATABASE)):
-        os.makedirs(os.path.dirname(DATABASE))
-        
-    conn = sqlite3.connect(DATABASE)
-    conn.row_factory = sqlite3.Row
-    return conn
