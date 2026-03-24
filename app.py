@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 # --- 1. ESTA PARTE ES NUEVA (Mejora la ruta de la base de datos) ---
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
 DATABASE = os.path.join(BASE_DIR, "Database", "landing_page.db")
 
 def get_db_connection():
@@ -65,3 +66,12 @@ def enviar_contacto():
 if __name__ == '__main__':
     # Usamos debug=True para que veas los errores en el navegador
     app.run(debug=True)
+    
+    def get_db_connection():
+    # Esto crea la carpeta si no existe, así evita errores
+    if not os.path.exists(os.path.dirname(DATABASE)):
+        os.makedirs(os.path.dirname(DATABASE))
+        
+    conn = sqlite3.connect(DATABASE)
+    conn.row_factory = sqlite3.Row
+    return conn
